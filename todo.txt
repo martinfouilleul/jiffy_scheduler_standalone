@@ -1,0 +1,24 @@
+
+[x] Re-integrate tempo curves
+	[x] use only one timestamp structure only
+	[x] review how we integrate curve -> maybe store timestamps for breakpoints?
+	[x] rewrite sched_task_update_pos_from_sync_curve
+	[x] Revert to using doubles for now
+
+[x] Remove usage of dynamic array and remove dynarray from containers...
+	[x] Treat curves as immutable
+	[x] For now just malloc a full block + elements
+	[x] Have a maximum number of sched handles slots and use a regular array + free list
+
+[x] collect macro_helpers and math_helpers together
+[x] Put platform-dependant fiber stuff in its own platform files
+
+[.] Small examples
+	[x] Add plot curve example
+	[x] Add small tempo curve example
+
+[.] Curve elements allocation
+	- Pass a memory pool on allocation to allocate elements (but then elements have to be a linked list)
+		 (not necessarily that bad since we have to do a linear search anyway?)
+	- Pass a liner arena (but then we can't free curves at will...)
+	- malloc a full block with curve + elements

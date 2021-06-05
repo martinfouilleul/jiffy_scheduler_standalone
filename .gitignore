@@ -1,0 +1,5 @@
+.DS_Store
+*.dSYM
+*.eps
+print_curve
+bin
