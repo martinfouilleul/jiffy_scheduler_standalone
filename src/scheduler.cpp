@@ -862,14 +862,14 @@ void* sched_background_job_main(void* userPointer)
 		//NOTE(martin): wait for a fiber to be available in the queue
 		MutexLock(queue->mutex);
 		{
-			while(ListEmpty(&queue->list))
+			while(ListEmpty(&queue->list) && queue->running)
 			{
 				ConditionWait(queue->condition, queue->mutex);
-				if(!queue->running)
-				{
-					MutexUnlock(queue->mutex);
-					goto end;
-				}
+			}
+			if(!queue->running)
+			{
+				MutexUnlock(queue->mutex);
+				goto end;
 			}
 			fiber = ListPopEntry(&queue->list, sched_fiber_info, jobQueueElt);
 		} MutexUnlock(queue->mutex);
