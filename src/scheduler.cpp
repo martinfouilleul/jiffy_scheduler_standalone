@@ -1104,7 +1104,7 @@ int sched_pick_event(sched_info* sched, sched_fiber_info** outFiber, sched_actio
 				nextAction->delay -= logicalTimeout;
 			}
 
-			f64 fiberTimeUpdate = maximum(0, logicalTimeout - sched->lookAhead);
+			f64 fiberTimeUpdate = taskDelay;
 			sched->lookAhead = fiberDelayFromLogicalTime - logicalTimeout;
 
 			//NOTE(martin): update tasks' positions
